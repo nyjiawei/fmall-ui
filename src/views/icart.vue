@@ -124,9 +124,6 @@
         <!-- 头部组件 -->
         <Top></Top>
         <br>
-        <br>
-        <br>
-        <!-- 内容 -->
         <div class="container content">
             <Breadcrumb>
                 <BreadcrumbItem to="/">首页</BreadcrumbItem>

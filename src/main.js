@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import iView from 'iview';
+import iviewArea from 'iview-area';
 import VueRouter from 'vue-router';
 import Routers from './router';
 import Util from './libs/util';
@@ -14,6 +15,7 @@ import axios from 'axios';
 Vue.use(VueRouter);
 Vue.use(iView);
 Vue.use(Vuex);
+Vue.use(iviewArea);
 
 //axios公共请求参数
 Vue.prototype.axios = axios;

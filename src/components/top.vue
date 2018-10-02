@@ -67,7 +67,7 @@
                         
                         <Divider type="vertical" />
                         <a href="/login" style="color:#464c5b">我的订单</a>
-                        <Dropdown trigger="click" @on-click="to" transfer=true>
+                        <Dropdown trigger="click" @on-click="to" transfer>
                             <Divider type="vertical" />
                             <a href="javascript:void(0)">
                                 username

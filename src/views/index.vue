@@ -1,5 +1,5 @@
 <style scoped lang="less">
-    
+
 </style>
 <template>
     <div class="index" style="background: #f8f8f9;">
@@ -9,7 +9,7 @@
         <br>
         <div class="container">
             <Row style="margin-bottom: 20px;">
-            <Carousel autoplay v-model="value2" autoplay-speed=4000 loop>
+            <Carousel autoplay autoplay-speed:4000 loop>
                 <CarouselItem>
                     <div class="demo-carousel">
                         <img src="../images/iphonexmax.jpg" width="100%" height="100%">
@@ -110,11 +110,8 @@
                     </Card> 
                 </Col>
                 <Col span="8">
-                   <Card style="width:auto;height:350px;">
-                        <div style="text-align:center">
-                            <img src="../images/logo.png" width="30%" height="30%">
-                            <h4>4</h4>
-                        </div>
+                   <Card style="width:auto;height:350px;" >
+                    
                     </Card> 
                 </Col>
             </Row>
@@ -138,7 +135,6 @@
         },
         data(){
             return{
-                
             }
         },
         methods: {
