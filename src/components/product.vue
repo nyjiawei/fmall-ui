@@ -5,11 +5,12 @@
    .product{
         width: 25%;
         float: left;
+        margin:0px;
     }
     .product-main{
         display: block;
-        margin: 16px;
-        padding: 16px;
+        margin: 5px;
+        padding: 0px;
         border: 1px solid #dddee1;
         border-radius: 6px;
         overflow: hidden;
@@ -73,7 +74,7 @@
 </style>
 <template>
     <div class="product">
-        <router-link :to="'/product/' + info.id" class="product-main">
+        <router-link :to="'/product/' + info.id" class="product-main" style="text-decoration: none;">
             <img :src="info.images">
             <h4>{{ info.name }}</h4>
             <div class="product-color" :style="{ background: colors[info.color]}"></div>

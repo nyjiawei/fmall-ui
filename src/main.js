@@ -22,7 +22,7 @@ Vue.prototype.axios = axios;
 axios.defaults.baseURL = 'http://127.0.0.1:9001';
 axios.defaults.headers['Content-Type'] = 'application/json';
 axios.defaults.headers['XPS-Version'] = '1.0.0';
-axios.defaults.headers['x-user-name'] = 'fengjiawei';
+axios.defaults.headers['x-user-name'] = 'jiawei';
 axios.defaults.withCredentials = true;
 
 // 路由配置
@@ -47,12 +47,16 @@ router.afterEach((to, from, next) => {
 
 const store = new Vuex.Store({
     state: {
+        addressList: [],
         productList: [],
         cartList: [],
         productCount: 0
     },
     getters: {},
     mutations: {
+        setAddressList (state, data) {
+            state.addressList = data;
+        },
         //添加商品列表
         setProductList (state, data) {
             state.productList = data;
@@ -100,6 +104,12 @@ const store = new Vuex.Store({
             }).then(res => {
                 context.commit('setProductList',res.data.entities);
                  context.commit('setProductCount',res.data.total_count);
+            });
+        },
+        // 请求地址列表
+        getAddressList (context) {
+            axios.get('/user/delivery').then(res => {
+                context.commit('setAddressList',res.data.deliveryList);
             });
         }
     }   

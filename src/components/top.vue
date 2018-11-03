@@ -4,10 +4,6 @@
        
         float:right;
     }
-    .userTop{
-       
-        float:right;
-    }
     .logo{
         width: 100px;
         height: 30px;
@@ -50,7 +46,7 @@
 </style>
 <template>
     <div class="Top">
-        <div class="fristTop">
+        <!-- <div class="fristTop">
             <div class="container">
                 <div class="userTop">
                         <a href="/login" style="color:#464c5b">登录</a>
@@ -67,25 +63,10 @@
                         
                         <Divider type="vertical" />
                         <a href="/login" style="color:#464c5b">我的订单</a>
-                        <Dropdown trigger="click" @on-click="to" transfer>
-                            <Divider type="vertical" />
-                            <a href="javascript:void(0)">
-                                username
-                                <Icon type="ios-arrow-down"></Icon>
-                            </a>
-                            <DropdownMenu slot="list">
-                                <DropdownItem name="userCenter">
-                                    个人中心
-                                </DropdownItem>
-                                <DropdownItem >安全设置</DropdownItem>
-                                <DropdownItem  divided><Icon type="ios-close-circle"/>
-                                    注销
-                                </DropdownItem>
-                            </DropdownMenu>
-                        </Dropdown>
+                        
                 </div>
             </div>
-        </div>
+        </div> -->
         <Menu mode="horizontal" :theme="theme1" active-name="1" class="top"> 
             <div class="container">
             <Row>
@@ -93,35 +74,31 @@
                 <div class="logo">
                     <img src="../images/logo.png" width="80%" height="80%">
                 </div>
-                <Col span="11">
-                <div class="layout-nav">
-                    <MenuItem name="1" to="/">
-                        <Icon type="ios-home" />
-                        首页
-                    </MenuItem>
-                    <MenuItem name="2">
-                        <Icon type="ios-bonfire" />
-                        精选
-                    </MenuItem>
-                    <Submenu name="3">
-                        <template slot="title">
-                            <Icon type="ios-apps" />
-                            分类
-                        </template>
-                        <MenuGroup title="分类查看">
-                            <MenuItem name="3-1">数码电子</MenuItem>
-                            <MenuItem name="3-2">手机</MenuItem>
-                            <MenuItem name="3-3">外设&配件</MenuItem>
-                        </MenuGroup>
-                    </Submenu>
-                    <MenuItem name="4" to="/product">
-                        <Icon type="ios-paper" />
-                        所有商品
-                    </MenuItem>
+                <Col span="10">
+                    <div class="layout-nav">
+                        <MenuItem name="1" to="/">
+                            首页
+                        </MenuItem>
+                        <MenuItem name="2">
+                            精选
+                        </MenuItem>
+                        <Submenu name="3">
+                            <template slot="title">
+                                分类
+                            </template>
+                            <MenuGroup title="分类查看">
+                                <MenuItem name="3-1">数码电子</MenuItem>
+                                <MenuItem name="3-2">手机</MenuItem>
+                                <MenuItem name="3-3">外设&配件</MenuItem>
+                            </MenuGroup>
+                        </Submenu>
+                        <MenuItem name="4" to="/product">
+                            所有商品
+                        </MenuItem>
 
-                </div>
+                    </div>
                 </Col>
-                <Col span="6">
+                <Col span="5">
                 <div>
                      <AutoComplete
                         v-model="search"
@@ -133,12 +110,34 @@
                     </AutoComplete>
                 </div>
                 </Col>
-                <Col span="4">
+                <Col span="3">
                     <div class="user">
-                        <router-link to="/icart" class="header-menu-cart" style="color: #515a6e;">
-                           <Icon type="ios-cart" size="26"/> 购物车
+                        <router-link to="/icart" class="header-menu-cart" style="color: #515a6e;text-decoration:none;">
+                            购物车 <Icon type="ios-cart" size="26"/> 
                             <span v-if="cartList.length">{{ cartList.length }}</span>
                         </router-link>
+                    </div>
+                </Col>
+                <Col span="3">
+                    <div class="user">
+                        <!-- <Dropdown trigger="click" @on-click="to">
+                               <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" />
+                            <DropdownMenu slot="list">
+                                <DropdownItem >username</DropdownItem>
+                                <DropdownItem name="userCenter">
+                                    个人中心
+                                </DropdownItem>
+                                <DropdownItem >安全设置</DropdownItem>
+                                <DropdownItem  divided><Icon type="ios-close-circle"/>
+                                    注销
+                                </DropdownItem>
+                            </DropdownMenu>
+                        </Dropdown> -->
+                        <div>
+                            <a href="/login" style="color:#464c5b">登录</a>
+                            <Divider type="vertical" />
+                            <a href="/register" style="color:#464c5b">注册</a>
+                        </div>
                     </div>
                 </Col>
             </Row>
@@ -166,7 +165,7 @@
                 return option.toUpperCase().indexOf(value.toUpperCase()) !== -1;
             },
             to(name){
-                this.$router.push({path:'/user/userCenter'});
+                this.$router.push({path:'/user/center'});
             }
         }
     }

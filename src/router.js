@@ -1,3 +1,4 @@
+
 const routers = [
     {
         path: '/',
@@ -24,14 +25,6 @@ const routers = [
     },
 
     {
-        path: '/user/userCenter',
-        meta: {
-            title: '个人中心'
-        },
-        component: (resolve) => require(['./views/userCenter.vue'], resolve)
-    },
-
-    {
         path: '/icart',
         meta: {
             title: '我的购物车'
@@ -47,5 +40,31 @@ const routers = [
         component: (resolve) => require(['./views/productList.vue'], resolve)
     },
 
+    {
+        path: '/order/commit',
+        meta: {
+            title: '提交订单'
+        },
+        component: (resolve) => require(['./views/commit.vue'], resolve)
+    },
+
+    {
+        path: '/user',
+        meta: {
+            title: '个人中心'
+        },
+        component: (resolve) => require(['./views/userCenter.vue'], resolve),
+        children: [
+            {
+                path: 'order',
+                component: (resolve) => require(['./components/order.vue'], resolve)
+            },
+            {
+                path: 'address',
+                component: (resolve) => require(['./components/userAddress.vue'], resolve)
+            }
+        ]
+    }
+    
 ];
 export default routers;

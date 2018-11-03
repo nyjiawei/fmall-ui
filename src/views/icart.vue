@@ -1,16 +1,13 @@
 <style>
    .cart{
         background: #fff;
-        border: 1px solid #dddee1;
-        border-radius: 10px;
+        min-height:500px;
     }
    
     .cart-header-main{
-         border-radius: 10px 10px 0 0;
         padding: 8px 32px;
         overflow: hidden;
-        border-bottom: 1px solid #dddee1;
-        background: #eee;
+        border-bottom: 3px solid #dddee1;
         overflow: hidden;
     }
     .cart-empty{
@@ -40,20 +37,22 @@
     }
     .cart-content-main{
         padding: 0 32px;
-        height: 60px;
-        line-height: 60px;
+        height: 80px;
+        line-height: 80px;
         text-align: center;
-        border-bottom: 1px dashed #e9eaec;
+        border-bottom: 1.5px dashed #e9eaec;
         overflow: hidden;
     }
     .cart-content-main div{
         float: left;
     }
     .cart-content-main img{
-        width: 40px;
-        height: 40px;
+        width: 80px;
+        height: 80px;
         position: relative;
-        top: 10px;
+    }
+    .cart-content-main span{
+        font-size: 15px;
     }
     .cart-control-minus,
     .cart-control-add{
@@ -118,16 +117,17 @@
         color: #fff;
         font-size: 12px;
     }
+   
 </style>
 <template>
-    <div class="icart" style="background: #f8f8f9;">
+    <div class="icart">
         <!-- 头部组件 -->
         <Top></Top>
         <br>
         <div class="container content">
             <Breadcrumb>
                 <BreadcrumbItem to="/">首页</BreadcrumbItem>
-                <BreadcrumbItem to="/components/breadcrumb">我的购物车</BreadcrumbItem>
+                <BreadcrumbItem>我的购物车</BreadcrumbItem>
             </Breadcrumb>
             <br>
             <div class="cart">
@@ -143,8 +143,8 @@
                 <div class="cart-content">
                     <div class="cart-content-main" v-for="(item, index) in cartList">
                         <div class="cart-info">
-                            <img :src="productDictList[item.id].images">
-                            <span>{{ productDictList[item.id].name }}</span>
+                                <img :src="productDictList[item.id].images">
+                                 <span>{{ productDictList[item.id].name }}</span>
                         </div>
                         <div class="cart-price">¥ {{ productDictList[item.id].price }}</div>
                         <div class="cart-count">
@@ -154,7 +154,7 @@
                         </div>
                         <div class="cart-cost">¥ {{ productDictList[item.id].price * item.count }}</div>
                         <div class="cart-delete">
-                            <span class="cart-control-delete" @click="handleDelete(index)">删除</span>
+                            <Button shape="circle" icon="md-close" size="small" @click="handleDelete(index)"></Button>
                         </div>
                     </div>
                     <div class="cart-empty" v-if="!cartList.length">购物车为空</div>
@@ -176,7 +176,7 @@
                         </template>
                     </div>
                     <div class="cart-footer-desc">
-                        <div class="cart-control-order" @click="handleOrder">现在结算</div>
+                        <div class="cart-control-order" @click="handleOrder">提交订单</div>
                     </div>
                 </div>
             </div>
@@ -253,10 +253,9 @@
                 }
             },
             handleOrder () {
-                this.$store.dispatch('buy').then(() => {
-                    window.alert('购买成功');
-                })
+                 this.$router.push({path:'/order/commit'});
             }
+            
             
         }
 

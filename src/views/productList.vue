@@ -1,4 +1,4 @@
-<style>
+<style scoped lang="less">
     .product-header{
        /*  padding: 5px 10px; */
         background: #dcdee2;
@@ -11,34 +11,37 @@
     a{
         text-decoration: none;
     }
+    .index{
+        display: inline-block;
+    }
 </style>
 <template>
     <div class="product" style="background: #f8f8f9;">
         <!-- 头部组件 -->
         <Top></Top>
         <br>
-        <br>
-        <br>
+        
         <!-- 内容 -->
         <div class="container content">
             <Breadcrumb>
                 <BreadcrumbItem to="/">首页</BreadcrumbItem>
-                <BreadcrumbItem to="/components/breadcrumb">全部结果</BreadcrumbItem>
+                <BreadcrumbItem to="/">全部结果</BreadcrumbItem>
             </Breadcrumb>
             <br>
              
             <div class="product-header">
-                <div class="cart-info">综合</div>
-                <div class="cart-price">销量</div>
-                <div class="cart-count">评价</div>
-                <div class="cart-cost">价格</div>
+                <div class="index">综合</div>
+                <div class="index">销量</div>
+                <div class="index">评价</div>
+                <div class="index">价格</div>
             </div>
             <div class="product-content">
-                <product v-for="item in lodeProductList" :info="item" :key="item.id"></product>
-                <div class="product-not-found" v-show="!lodeProductList.length">
+                <product v-for="item in loadProductList" :info="item" :key="item.id"></product>
+                <div class="product-not-found" v-show="!loadProductList.length">
                     暂无相关商品
                 </div>
             </div>
+            <br>
             <br>
             <Page :total="totalCount" :current="pageNo" :page-size="pageSize" 
             @on-change="handlePage" @on-page-size-change="handlePageSize"
@@ -70,7 +73,7 @@
             Top,foot,product
         },
         computed:{
-            lodeProductList() {
+            loadProductList() {
                 this.totalCount = this.$store.state.productCount;
                 return this.$store.state.productList;
             }

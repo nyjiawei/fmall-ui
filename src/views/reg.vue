@@ -10,16 +10,34 @@
         margin-right: auto;
         /* text-align: center; */
     }
+    .header{
+        height: 100px;
+        box-shadow: 0px 0px 5px #888888;
+    }
 </style>
 <template>
-    <div class="reg">
-        <Menu mode="horizontal" active-name="1">
-            注册
-            <div class="user" style="float:right">
-                <P>已注册账号？<a href="/login">去登录<Icon type="ios-arrow-forward" /></a></P>
+    <div class="">
+        <div class="header">
+            <div class="container">
+                <Row>
+                    username
+                </Row>
+                <Row>
+                    <Col span="12">
+                        <h2>注册</h2>
+                    </Col>
+                    <Col span="12">
+                        <Steps :current="1">
+                            <Step title="欢迎"></Step>
+                            <Step title="注册"></Step>
+                            <Step title="购物"></Step>
+                        </Steps>
+                    </Col>
+                </Row>
             </div>
-        </Menu>
+        </div>
         <br>
+        <div class="reg">
         <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
             <FormItem label="用户名" prop="name">
                 <Input v-model="formValidate.name" placeholder="请输入您的用户名" size="large"></Input>
@@ -51,6 +69,7 @@
                 <Button type="primary" @click="handleSubmit('formValidate')" long>提交</Button>
             </FormItem>
         </Form>
+    </div>
     </div>
 
 </template>
