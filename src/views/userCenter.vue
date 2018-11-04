@@ -15,9 +15,20 @@
 		font-size: 14px;
 	}
 	.userHead{
-		width: 70px;
+		display:inline-block;
+		margin:5px auto;
+		width:70px;
 		height:70px;
 		border-radius:70px;
+		-webkit-border-radius:70px;
+		-moz-border-radius:70px;
+		border:2px solid #fff;
+		box-shadow:0 0 4px #ccc;
+		overflow:hidden;
+	}
+	.userHead img{
+		width:100%;
+		min-height:100%;
 	}
 </style>
 <template>
@@ -30,19 +41,13 @@
         	<Card style="width:auto;height:auto;">
 				<Row style="text-align: center">
 					<Col span="9">
-						<Row>
-							<Col span="12">
-		                         <div class="userHead">
-		                         	<img src="../images/user2.jpg" width="100%" height="100%">
-		                         </div>
-		                    </Col>
-	                        <Col span="12">
-	                     		 <p>username</p>
-	                     		 <p>等级:</p>
-	                     		 <Rate value:5/>
-	                        </Col>
+                     <div class="userHead">
+                     	<img src="../images/user2.jpg">
+                     </div>
+             		 <p>username</p>
+             		 <p>等级:</p>
+             		 <Rate value:5/>
 		                       
-	                     </Row>
 	                </Col>
 	                <Col span="5">
 	                     <div class="panel-heading">

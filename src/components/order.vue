@@ -1,9 +1,5 @@
 <style>
-	.userHead{
-		width: 70px;
-		height:70px;
-		border-radius:70px;
-	}
+	
 	.productImg{
 		width: 60px;
 		height: 60px;
@@ -48,6 +44,10 @@
 		width: 15%;
 		text-align: center;
 	}
+	.order-opertion a{
+		text-align: center;
+		color: #657180;
+	}
 	.order-delete{
 		width: 10%;
 		text-align: center;
@@ -67,43 +67,57 @@
 </style>
 <template>
 	<div class="">
-		
         <Card style="width:auto;min-height:850px;height:auto!important;" shadow>
              <Tabs>
 			    <TabPane label="最近订单">
-			    		
-
-			    		<!-- 订单列表 -->
-						<div class="order" v-for="item in orderList">
-							<div class="order-header">
-								<div class="order-header-content">订单号：{{ item.id }}</div>
-			    				<div class="order-header-content">{{ item.createTime }}</div>
-							</div>
-							<div class="order-content">
-								<div class="order-productList">
-									<div class="product" v-for="product in item.productList">
-										<div class="productImage">
-											<div class="productImg">
-		    									<img :src="product.image" width="100%" height="100%">
-		    								</div>
-										</div>
-	    								<div class="productName">{{ product.name }}</div>
-	    								<div class="amount">x {{ product.amount }} </div>
+		    		<!-- 订单列表 -->
+					<div class="order" v-for="item in orderList">
+						<div class="order-header">
+							<div class="order-header-content">订单号：{{ item.id }}</div>
+		    				<div class="order-header-content">{{ item.createTime }}</div>
+						</div>
+						<div class="order-content">
+							<div class="order-productList">
+								<div class="product" v-for="product in item.productList">
+									<div class="productImage">
+										<div class="productImg">
+	    									<img :src="product.image" width="100%" height="100%">
+	    								</div>
 									</div>
-								</div>
-			    				<div class="order-person">{{ item.person }}</div>
-			    				<div class="order-price">￥{{ item.totalPrices }}</div>
-								<div class="order-status">{{ item.status }}</div>
-								<div class="order-opertion">
-									<P>评价</P>
-								</div>
-								<div class="order-delete">
-									 <Button shape="circle" icon="md-close" size="small" @click="handleDelete(index)"></Button>
+    								<div class="productName">{{ product.name }}</div>
+    								<div class="amount">x {{ product.amount }} </div>
 								</div>
 							</div>
-			    		</div>
-			    		<!-- 订单列表end -->
-			    		
+		    				<div class="order-person">
+		    					<span><Icon type="ios-contact-outline" size="30"/></span>
+		    					<br/>
+		    					<span>{{ item.person }}</span>
+		    				</div>
+		    				<div class="order-price">￥{{ item.totalPrices }}</div>
+							<div class="order-status">{{ item.status }}</div>
+							<div class="order-opertion">
+								<a href="">评价</a><br>
+								<a href="">查看详细</a><br>
+								<a href="">再次购买</a><br>
+							</div>
+							<div class="order-delete">
+								 <Button shape="circle" icon="md-close" size="small" @click="del(item)"></Button>
+							</div>
+						</div>
+		    		</div>
+		    		<!-- 订单列表end -->
+		    		<Modal v-model="modal3" width="360">
+				        <p slot="header" style="color:#f60;text-align:center">
+				            <Icon type="ios-information-circle"></Icon>
+				            <span>删除订单</span>
+				        </p>
+				        <div style="text-align:center">
+				            <p>确认删除?您稍后可以在回收站里找回</p>
+				        </div>
+				        <div slot="footer">
+				            <Button type="error" size="large" long :loading="modal_loading" @click="deleteOrder()">Delete</Button>
+				        </div>
+				    </Modal>
 			    </TabPane>
 			    <TabPane label="全部订单">全部订单</TabPane>
 			</Tabs>
@@ -118,11 +132,42 @@
 		 	}
 		},
 		methods:{
-			
+			del(object) {
+				this.orderId = object.id;
+            	this.modal3 = true;
+			},
+			deleteOrder() {
+            	this.modal_loading = true;
+            	this.axios.delete('/user/orders',{
+            		params:{
+                		orderId: this.orderId
+                	}
+                	}).then(res =>{
+                		if (res.data.result == "OK") {
+                			this.modal_loading = false;
+                    		this.modal3 = false;
+                    		this.getOrderList();
+                			this.$Message.success('Successfully delete');
+                		}
+                });
+            },
+            getOrderList () {
+	           	this.axios.get('/user/orders',{
+	           	    params:{
+	                    status: '', 
+	                    orderNo: ''
+	                }
+	            }).then(res => {
+	                this.orderList = res.data.entities;
+	            });
+        	}
 		},
 		data () {
             return {
-                orderList: []
+                orderList: [],
+                modal3: false,
+                modal_loading: false,
+                orderId: 0
             }
         },
 		mounted () {
