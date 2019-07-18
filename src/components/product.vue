@@ -3,16 +3,14 @@
         text-decoration:none;
     }
    .product{
-        width: 25%;
+        width: 33.33%;
         float: left;
         margin:0px;
     }
     .product-main{
         display: block;
-        margin: 5px;
         padding: 0px;
         border: 1px solid #dddee1;
-        border-radius: 6px;
         overflow: hidden;
         background: #fff;
         text-align: center;
@@ -28,9 +26,7 @@
         text-overflow: ellipsis;
         white-space: nowrap;
     }
-    .product-main:hover h4{
-        color: #0070c9;
-    }
+   
     .product-color{
         display: block;
         width: 16px;
@@ -38,10 +34,10 @@
         border: 1px solid #dddee1;
         border-radius: 50%;
         margin: 6px auto;
+       
     }
     .product-cost{
-        color: #de4037;
-        margin-top: 6px;
+        margin-top: 9px;
     }
     .product-add-cart{
         display: none;
@@ -65,7 +61,7 @@
         bottom: 5px;
         left: 5px;
     }
-    .product-main:hover .product-add-cart,{
+    .product-main:hover .product-add-cart{
         display: inline-block;
     }
     .product-main:hover .product-add-enjoy{
@@ -77,8 +73,8 @@
         <router-link :to="'/product/' + info.id" class="product-main" style="text-decoration: none;">
             <img :src="info.images">
             <h4>{{ info.name }}</h4>
-            <div class="product-color" :style="{ background: colors[info.color]}"></div>
             <div class="product-cost">¥ {{info.price}}</div>
+            <div class="product-color" :style="{ background: colors[info.color]}"></div>
             <div class="product-add-cart" @click.prevent="handleCart">
                 <Icon type="ios-cart-outline" size="30"/>
             </div>

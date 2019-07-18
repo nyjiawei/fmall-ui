@@ -5,8 +5,6 @@
     <div class="index" style="background: #f8f8f9;">
         <Top></Top>
         <br>
-        <br>
-        <br>
         <div class="container">
             <Row style="margin-bottom: 20px;">
             <Carousel autoplay autoplay-speed:4000 loop>

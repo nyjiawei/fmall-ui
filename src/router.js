@@ -43,7 +43,8 @@ const routers = [
     {
         path: '/order/commit',
         meta: {
-            title: '提交订单'
+            title: '提交订单',
+            requireAuth: true
         },
         component: (resolve) => require(['./views/commit.vue'], resolve)
     },
@@ -51,16 +52,23 @@ const routers = [
     {
         path: '/user',
         meta: {
-            title: '个人中心'
+            title: '个人中心',
+            requireAuth: true
         },
         component: (resolve) => require(['./views/userCenter.vue'], resolve),
         children: [
             {
                 path: 'order',
+                meta: {
+                    requireAuth: true
+                },
                 component: (resolve) => require(['./components/order.vue'], resolve)
             },
             {
                 path: 'address',
+                meta: {
+                    requireAuth: true
+                },
                 component: (resolve) => require(['./components/userAddress.vue'], resolve)
             }
         ]

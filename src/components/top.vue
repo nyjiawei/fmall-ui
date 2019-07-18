@@ -120,7 +120,7 @@
                 </Col>
                 <Col span="3">
                     <div class="user">
-                        <!-- <Dropdown trigger="click" @on-click="to">
+                        <Dropdown trigger="click" @on-click="to">
                                <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" />
                             <DropdownMenu slot="list">
                                 <DropdownItem >username</DropdownItem>
@@ -132,12 +132,12 @@
                                     注销
                                 </DropdownItem>
                             </DropdownMenu>
-                        </Dropdown> -->
-                        <div>
+                        </Dropdown>
+                        <!-- <div>
                             <a href="/login" style="color:#464c5b">登录</a>
                             <Divider type="vertical" />
                             <a href="/register" style="color:#464c5b">注册</a>
-                        </div>
+                        </div> -->
                     </div>
                 </Col>
             </Row>
@@ -165,7 +165,7 @@
                 return option.toUpperCase().indexOf(value.toUpperCase()) !== -1;
             },
             to(name){
-                this.$router.push({path:'/user/center'});
+                this.$router.push({path:'/user/order'});
             }
         }
     }

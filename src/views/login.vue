@@ -70,7 +70,9 @@
                                 passWord: this.formInline.password
                             }
                         }).then(res => {
-                             if (res.data.message == 'success') {
+                             if (res.data.code == 200) {
+                                //this.$store.dispatch('changeLogin',res.data.data);
+                                localStorage.setItem('accessToken', res.data.data);
                                 this.$Message.success('登录成功!');
                                 this.$router.push({path:'/'});
                             }else{
@@ -87,8 +89,10 @@
                         this.$Message.error('请正确填写用户名和密码!');
                     }
                 })
+            },
+            saveToken(){
+                
             }
-            
         }
     }
 </script>

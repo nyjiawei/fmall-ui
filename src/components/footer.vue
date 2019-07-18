@@ -4,20 +4,25 @@
         list-style:none;
     } 
     p{
-        color:white;
-        font-size:16px;
+        color:#464c5b;
+        font-size:12px;
         font-weight: bolder;
     }
     a{
-        color:white;
+        color:#464c5b;
+        font-size:12px;
     }
-    a:hover{
-        color:#ff9900;
-    } 
+
     
 </style>
 <template> 
     <div class="container">
+        <Breadcrumb separator=">">
+            <BreadcrumbItem to="/">首页</BreadcrumbItem>
+            <BreadcrumbItem to="/components/breadcrumb">分类</BreadcrumbItem>
+            <BreadcrumbItem>当前页</BreadcrumbItem>
+        </Breadcrumb>
+        <br>
         <div class="row">
             <div class="col-md-3 shop">
                 <p>购物指南</p>
@@ -63,7 +68,7 @@
         
         <div class="row" style="text-align: center;">
             <div class="col-md-12 shop">
-            <a style="color: white;">Copyright &copy; 2014.Design by jiawei All rights reserved</a>
+                <a>Copyright &copy; 2014.Design by jiawei All rights reserved</a>
             </div>
         </div>
        
