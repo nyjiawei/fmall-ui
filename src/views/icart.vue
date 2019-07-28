@@ -125,10 +125,6 @@
         <Top></Top>
         <br>
         <div class="container content">
-            <Breadcrumb>
-                <BreadcrumbItem to="/">首页</BreadcrumbItem>
-                <BreadcrumbItem>我的购物车</BreadcrumbItem>
-            </Breadcrumb>
             <br>
             <div class="cart">
                 <div class="cart-header">
@@ -182,7 +178,7 @@
             </div>
         </div>
         <!-- 内容结束 -->
-        <Footer style="background:#515a6e">
+        <Footer style="background:#F2F2F2">
            <foot></foot> 
         </Footer>
         <!-- 回到到顶部组件 -->

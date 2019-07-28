@@ -1,44 +1,36 @@
 <style scoped lang="less">
     .login{
-        width: 350px;
-        position: relative;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 100px;
+        padding: 150px;
         text-align: center;
+        
     }
     p{
         font-size:20px;
     }
 </style>
-<template style="backgound:#fff">
-    
+<template>
     <div class="login">
-        
-        <Form ref="formInline" :model="formInline" :rules="ruleInline">
-            <div class="logo">
-                <img src="../images/logo.png" width="26%" height="26%"> 
+        <Card style="width: 350px;margin: auto;">
+            <Form ref="formInline" :model="formInline" :rules="ruleInline">
+                <h1><Icon type="ios-contact"/></h1>
                 <br>
-               
-            </div>
-             <p>Sign in to Mall</p>
-            <FormItem prop="user">
-                <Input type="text" v-model="formInline.user" placeholder="用户名" size="large">
-                    <Icon type="ios-person-outline" slot="prepend"></Icon>
-                </Input>
-            </FormItem>
-            <FormItem prop="password">
-                <Input type="password" v-model="formInline.password" placeholder="密码" size="large">
-                    <Icon type="ios-lock-outline" slot="prepend"></Icon>
-                </Input>
-            </FormItem>
-            <FormItem>
-                <Button type="primary" @click="handleSubmit('formInline')" long>登录</Button>
-            </FormItem>
-            <FormItem>
-                <span>还没有账号？<a href="/register">去注册</a></span>
-            </FormItem>
-        </Form>
+                <FormItem prop="user">
+                    <Input type="text" v-model="formInline.user" placeholder="用户名" size="large" @keyup.enter.native="handleSubmit('formInline')">
+                    </Input>
+                </FormItem>
+                <FormItem prop="password">
+                    <Input type="password" v-model="formInline.password" placeholder="密码" size="large" @keyup.enter.native="handleSubmit('formInline')">
+                    </Input>
+                </FormItem>
+                <FormItem>
+                    <Button type="primary" @click="handleSubmit('formInline')" long shape="circle">登录</Button>
+                </FormItem>
+                <FormItem>
+                    <span>还没有账号？<a href="/register">去注册</a></span><br>
+                    <a href="/passwordHelp">忘记账号或密码？</a>
+                </FormItem>
+            </Form>
+        </Card>
     </div>
 </template>
 <script>
@@ -51,11 +43,11 @@
                 },
                 ruleInline: {
                     user: [
-                        { required: true, message: 'Please fill in the user name', trigger: 'blur' }
+                        { required: true, message: '请输入用户名', trigger: 'blur' }
                     ],
                     password: [
-                        { required: true, message: 'Please fill in the password.', trigger: 'blur' },
-                        { type: 'string', min: 6, message: 'The password length cannot be less than 6 bits', trigger: 'blur' }
+                        { required: true, message: '请输入密码', trigger: 'blur' },
+                        { type: 'string', min: 6, message: '密码长度不能少于6位', trigger: 'blur' }
                     ]
                 }
             }
@@ -73,6 +65,7 @@
                              if (res.data.code == 200) {
                                 //this.$store.dispatch('changeLogin',res.data.data);
                                 localStorage.setItem('accessToken', res.data.data);
+                                localStorage.setItem('username', 'jiawei');
                                 this.$Message.success('登录成功!');
                                 this.$router.push({path:'/'});
                             }else{
@@ -80,6 +73,16 @@
                             }
                         });
                        
+            },
+             created(){
+                //登录添加键盘事件,注意,不能直接在焦点事件上添加回车
+                let that = this;
+                document.onkeydown = function (e) {
+                    let key = window.event.keyCode;
+                    if (key === 13){
+                        that.handleSubmit(name);//方法
+                    }
+                }
             },
             handleSubmit(name) {
                 this.$refs[name].validate((valid) => {

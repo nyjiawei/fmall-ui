@@ -34,7 +34,7 @@ const router = new VueRouter(RouterConfig);
 
 router.beforeEach((to, from, next) => {
     iView.LoadingBar.start();
-    //Util.title(to.meta.title);
+    Util.title(to.meta.title);
     if (to.meta.requireAuth) {  // 判断该路由是否需要登录权限
         if (localStorage.accessToken) {  // 通过vuex state获取当前的token是否存在
             next();
@@ -59,8 +59,6 @@ router.afterEach((to, from, next) => {
 
 const store = new Vuex.Store({
     state: {
-        // 存储token
-        accessToken: localStorage.getItem('accessToken') ? localStorage.getItem('accessToken') : '',
         addressList: [],
         productList: [],
         cartList: [],
@@ -68,12 +66,6 @@ const store = new Vuex.Store({
     },
     getters: {},
     mutations: {
-        // 修改token，并将token存入localStorage
-        changeLogin (state, accessToken) {
-            state.accessToken = accessToken;
-            console.log("test");
-            localStorage.setItem('accessToken', accessToken);
-        },
         setAddressList (state, data) {
             state.addressList = data;
         },

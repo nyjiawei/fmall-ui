@@ -30,8 +30,7 @@ axios.interceptors.response.use(function (response) {
 // console.log(response)
 //返回参数是noLogin时，返回首页
 if (response.data.code === 401) {
-    localStorage.setItem('accessToken', null);
-    Router.push({path:'/login'});
+    localStorage.clear();
     Message.warning('当前会话过期,请重新登录');
 }
 return response

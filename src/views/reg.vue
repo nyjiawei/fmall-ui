@@ -10,71 +10,63 @@
         margin-right: auto;
         /* text-align: center; */
     }
-    .header{
-        height: 100px;
-        box-shadow: 0px 0px 5px #888888;
+    .codeImg{
+        width: 90px;
+        height: 30px;
+        padding: 0px;
+        position: absolute;
+        margin-top: -36px;
+        margin-left: 327px;
     }
 </style>
 <template>
     <div class="">
-        <div class="header">
-            <div class="container">
-                <Row>
-                    username
-                </Row>
-                <Row>
-                    <Col span="12">
-                        <h2>注册</h2>
-                    </Col>
-                    <Col span="12">
-                        <Steps :current="1">
-                            <Step title="欢迎"></Step>
-                            <Step title="注册"></Step>
-                            <Step title="购物"></Step>
-                        </Steps>
-                    </Col>
-                </Row>
-            </div>
-        </div>
-        <br>
+        <Top></Top>
+        <br><br><br><br>
         <div class="reg">
-        <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
-            <FormItem label="用户名" prop="name">
-                <Input v-model="formValidate.name" placeholder="请输入您的用户名" size="large"></Input>
-            </FormItem>
-            <FormItem label="密码" prop="password">
-                <Input type="password" v-model="formValidate.password" placeholder="请输入您的密码" size="large">
-                </Input>
-            </FormItem>
-            <FormItem label="再次确认" prop="again">
-                <Input type="password" v-model="formValidate.again" placeholder="再次输入您的密码" size="large"></Input>
-            </FormItem>
-            <FormItem label="邮箱" prop="email">
-                <Input v-model="formValidate.email" placeholder="请输入您的邮箱" size="large"></Input>
-            </FormItem>
-            <FormItem label="验证码" prop="code">
-                <Row>
-                    <Col span="19">
-                         <Input type="text" v-model="formValidate.code" placeholder="请输入验证码" size="large">
-                        </Input>
-                    </Col>
-                    <Col span="5">
-                        <img :src="img_src"/>
-                    </Col>
-                </Row>
-                 <a href="javacript:void(0);" @click="pushCode ()" style="float:right">看不清？换一张</a>
-            </FormItem>
-           
-            <FormItem>
-                <Button type="primary" @click="handleSubmit('formValidate')" long>提交</Button>
-            </FormItem>
-        </Form>
-    </div>
+            <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
+                <FormItem label="用户名" prop="name">
+                    <Input v-model="formValidate.name" placeholder="请输入您的用户名" size="large"></Input>
+                </FormItem>
+                <FormItem label="密码" prop="password">
+                    <Input type="password" v-model="formValidate.password" placeholder="请输入您的密码" size="large">
+                    </Input>
+                </FormItem>
+                <FormItem label="再次确认" prop="again">
+                    <Input type="password" v-model="formValidate.again" placeholder="再次输入您的密码" size="large"></Input>
+                </FormItem>
+                <FormItem label="邮箱" prop="email">
+                    <Input v-model="formValidate.email" placeholder="请输入您的邮箱" size="large"></Input>
+                </FormItem>
+                <FormItem label="验证码" prop="code">
+                    <Row>
+                        <Col span="24">
+                            <div style="withd:100%;margin:0px">
+                                <Input type="text" v-model="formValidate.code" placeholder="请输入验证码" size="large"/>
+                                <div class="codeImg">
+                                    <img :src="img_src"/>
+                                </div>
+                            </div>
+                        </Col>
+                    </Row>
+                    <a href="javacript:void(0);" @click="pushCode()" style="float:right">看不清？换一张</a>
+                </FormItem>
+                <FormItem>
+                    <Button type="primary" @click="handleSubmit('formValidate')" long shape="circle">提交</Button>
+                    <br><br>
+                    <Button type="warning" @click="handleReset('formValidate')" long shape="circle">重置</Button>
+                </FormItem>
+            </Form>
+        </div>
     </div>
 
 </template>
 <script>
+    import Top from '../components/top.vue'; 
     export default {
+        components: {
+            Top
+        },
         data () {
             return {
                 formValidate: {
@@ -135,6 +127,9 @@
                         this.$Message.error('请正确填写注册信息!');
                     }
                 })
+            },
+            handleReset (name) {
+                this.$refs[name].resetFields();
             }
         }
     }

@@ -32,16 +32,22 @@
 		width: 10%;
 		text-align: center;
 	}
+	.userInfo{
+		width: 55%;
+		position: absolute;
+		margin-top: 0;
+	}
 	.order-price{
-		width: 10%;
+		width: 20%;
 		text-align: center;
+		height: 100%;
 	}
 	.order-status{
-		width: 10%;
+		width: 20%;
 		text-align: center;
 	}
 	.order-opertion{
-		width: 15%;
+		width: 20%;
 		text-align: center;
 	}
 	.order-opertion a{
@@ -49,7 +55,7 @@
 		color: #657180;
 	}
 	.order-delete{
-		width: 10%;
+		width: 20%;
 		text-align: center;
 	}
 	.product{
@@ -63,6 +69,7 @@
 	}
 	.amount{
 		width: 10%;
+		text-align: center;
 	}
 </style>
 <template>
@@ -88,20 +95,22 @@
     								<div class="amount">x {{ product.amount }} </div>
 								</div>
 							</div>
-		    				<div class="order-person">
-		    					<span><Icon type="ios-contact-outline" size="30"/></span>
-		    					<br/>
-		    					<span>{{ item.person }}</span>
-		    				</div>
-		    				<div class="order-price">￥{{ item.totalPrices }}</div>
-							<div class="order-status">{{ item.status }}</div>
-							<div class="order-opertion">
-								<a href="">评价</a><br>
-								<a href="">查看详细</a><br>
-								<a href="">再次购买</a><br>
-							</div>
-							<div class="order-delete">
-								 <Button shape="circle" icon="md-close" size="small" @click="del(item)"></Button>
+							<div class="userInfo">
+								<div class="order-person">
+									<span><Icon type="ios-contact-outline" size="30"/></span>
+									<br/>
+									<span>{{ item.person }}</span>
+								</div>
+								<div class="order-price">￥{{ item.totalPrices }}</div>
+								<div class="order-status">{{ item.status }}</div>
+								<div class="order-opertion">
+									<a href="">评价</a><br>
+									<a href="">查看详细</a><br>
+									<a href="">再次购买</a><br>
+								</div>
+								<div class="order-delete">
+									<Button shape="circle" icon="md-close" size="small" @click="del(item)"></Button>
+								</div>
 							</div>
 						</div>
 		    		</div>
@@ -143,7 +152,7 @@
                 		orderId: this.orderId
                 	}
                 	}).then(res =>{
-                		if (res.data.result == "OK") {
+                		if (res.data.message == "SUCCESS") {
                 			this.modal_loading = false;
                     		this.modal3 = false;
                     		this.getOrderList();

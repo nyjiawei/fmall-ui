@@ -177,7 +177,7 @@
                         totile: this.formValidate.totile,
                         desc: this.formValidate.desc
                     }).then(res => {
-                    if (res.data.message == 'success') {
+                    if (res.data.message == 'SUCCESS') {
                     	this.modal_loading = false;
                     	this.modal2 = false;
                         this.$Message.success('添加成功!');
@@ -222,17 +222,14 @@
                 		deliveryId: this.formValidate.id
                 	}
                 	}).then(res =>{
-                		if (res.data.result == "OK") {
+                		if (res.data.message == "SUCCESS") {
                 			this.modal_loading = false;
                     		this.modal3 = false;
                 			this.$Message.success('Successfully delete');
                 			this.$store.dispatch('getAddressList',param); 
                 		}
                 });
-            },
-            test(){
-        		alert(this.$store.state.addressList.length);
-        	}
+            }
         },
         mounted () {
            this.$store.dispatch('getAddressList',param); 

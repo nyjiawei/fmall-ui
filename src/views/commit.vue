@@ -1,25 +1,19 @@
 <style>
 	.modifly{
 		display: none;
-	}
-	.userAddress:hover{
-		border: 1px solid #2d8cf0;
-		cursor: pointer;
-		.modifly{
-		display: block;
-		float:right;
-		}
+	
 	}
 	.userAddress{
 		padding: 5px;
-		border: 1px solid #dcdee2;
+		border: 0px solid #dcdee2;
 		margin-top: 10px;
 		font-size: 15px;
-
 	}
 	.header{
 		height: 100px;
 		box-shadow: 0px 0px 5px #888888;
+        vertical-align: middle;
+        padding: 0px;
 	}
 	.address-header-content{
 		display: inline-block;
@@ -156,45 +150,49 @@
         color: #fff;
         font-size: 12px;
     }
+    .selected{
+        background-image: url("../images/logo.png");
+    }
 </style>
 <template>
 	<div class="commit">
 		<div class="header">
-
 			<div class="container">
 				<Row>
-					username
-				</Row>
-				<Row>
-					<Col span="12">
-						<h2>结算页</h2>
-					</Col>
-					<Col span="12">
-						<Steps :current="1">
-					        <Step title="我的购物车"></Step>
-					        <Step title="填写核对订单信息"></Step>
-					        <Step title="成功提交订单"></Step>
-					    </Steps>
-					</Col>
+                    <div style="margin-top: 25px">
+                        <Col span="12" style="display: inline-block;">
+                            <Row>
+                                <Col span="2">
+                                    <h1><Icon type="md-appstore" /></h1>
+                                </Col>
+                                <Col span="22">
+                                    <h1>结算页</h1>
+                                </Col>
+                            </Row>
+                        </Col>
+                        <Col span="12">
+                            <Steps :current="1" style="margin-top: 15px">
+                                <Step title="我的购物车"></Step>
+                                <Step title="填写核对订单信息"></Step>
+                                <Step title="成功提交订单"></Step>
+                            </Steps>
+                        </Col>
+                    </div>
 				</Row>
 			</div>
 		</div>
 		<div class="container">
 			<br/>
-		    <Breadcrumb>
-                <BreadcrumbItem to="/">首页</BreadcrumbItem>
-                <BreadcrumbItem to="/icart">我的购物车</BreadcrumbItem>
-                <BreadcrumbItem>提交订单</BreadcrumbItem>
-            </Breadcrumb>
 			<div class="address">
 				<div class="address-header">
-					<div class="address-header-content">收货地址</div>
+					<div class="address-header-content"><h4>选择一个收货地址</h4></div>
 					<div class="address-header-content" style="float:right">
 						<a href="#" slot="extra" @click.prevent="createAddress('formValidate')">
 			            	添加新地址
 			        	</a>
 					</div>
 				</div>
+                <br>
 				<Modal v-model="modal2" width="700">
 			        <p slot="header" style="text-align:center">
 			            <Icon type="ios-information-circle"></Icon>
@@ -233,33 +231,31 @@
 			            <Button type="primary" size="large" shape="circle" @click="ok('formValidate')">提交</Button>
 			        </div>
 			    </Modal>
-				<div class="userAddress" v-for="item in loadAddressList">
-					<div class="userAddress-content" @click="selectAddress(item)">
-						<Icon type="ios-flag-outline" size="30"/>
-						<span>{{ item.label }}</span>&nbsp;
-						<span>{{ item.personName }}</span>&nbsp;
-						<span>{{ item.address }}</span>&nbsp;
-						<span>{{ item.phoneNumber }}</span>
-						<a href="" @click.prevent="modiflieAdderss(item)" class="modifly">修改</a>
-					</div>
-				</div>
-				<a href="" @click.prevent=""  v-show="loadAddressList.length>1">
-					收起列表
-				</a>
-				<a href="" @click.prevent=""  v-show="loadAddressList.length==1">
-					展开列表
-				</a>
-				<div class="userAddress" v-show="!loadAddressList.length">
+				<div class="addressList" v-for="item in loadAddressList" @click="selectAddress(item)">
+                    <div class="addressList-content  selected">
+                        <div class="addressList-header">
+                            <Icon type="md-person" size="20"/>{{ item.personName }}
+                        </div>&nbsp;&nbsp;
+                        <div class="addressList-header">{{ item.label }}</div>
+                      
+                    </div>
+                    <div class="addressList-content" :title="item.address">
+                        <Icon type="ios-paper-plane" size="20"/>
+                        {{ item.address }}
+                    </div>
+                    <div class="addressList-content">
+                        <Icon type="md-call" size="20"/>{{ item.phoneNumber }}
+                    </div>
+                </div>
+				
+				<div class="userAddress" v-show="!loadAddressList.length" style="text-align: center;">
 					<div class="userAddress-content">
 						您还没有收货地址
-						<a href="#" slot="extra" @click.prevent="createAddress('formValidate')">
-			            	添加新地址
-			        	</a>
 					</div>
 				</div>
 				<br/>
 				<br/>
-				
+                <a href="/icart">返回购物车修改</a>
 				<div class="cart">
 	                <div class="cart-header">
 	                    <div class="cart-header-main">
@@ -285,13 +281,13 @@
 	                            <Button shape="circle" icon="md-close" size="small" @click="handleDelete(index)"></Button>
 	                        </div>
 	                    </div>
-	                    <div class="cart-empty" v-if="!cartList.length">商品为空！</div>
+	                    <div class="cart-empty" v-if="!cartList.length"> <Icon type="ios-sad-outline" size="40px"/>空空如也！</div>
 	                </div>
 	                <div class="cart-promotion" v-show="cartList.length">
 	                    <span>使用优惠码：</span>
 	                    <input type="text" v-model="promotionCode">
 	                    <span class="cart-control-promotion" @click="handleCheckCode">验证</span>
-	                    <br>
+	                    <br><br>
 	                    <span>寄送至：{{ userAddress }}</span>
 	                </div>
 	               
@@ -316,7 +312,7 @@
 			</div>
 	    </div>
 	    <!-- 内容结束 -->
-	    <Footer style="background:#515a6e">
+	    <Footer style="background:#F2F2F2">
 	       <foot></foot> 
 	    </Footer>
 	    <!-- 回到到顶部组件 -->
@@ -428,20 +424,26 @@
                 }
             },
             handleOrder () {
-                this.axios.post('user/orders',{
-                        person: this.person,
-                        phoneNumber: this.phone,
-                        totalPrices: this.costAll,
-                		address: this.userAddress,
-                        productList: this.getProduct(),
-                        cartList:this.cartList
-                    }).then(res => {
-                    if (res.data.message == 'success') {
-                        this.$Message.success('下单成功!');
-                    } else{
-                         this.$Message.error(res.data.message);
-                    }
-                });
+                if(this.userAddress !='' && this.userAddress !=null){
+                    this.axios.post('user/orders',{
+                            person: this.person,
+                            phoneNumber: this.phone,
+                            totalPrices: this.costAll,
+                            address: this.userAddress,
+                            productList: this.getProduct(),
+                            cartList:this.cartList
+                        }).then(res => {
+                            if (res.data.message == 'SUCCESS') {
+                                this.$Message.success('下单成功!');
+                                //支付页还没做，先跳到个人中心
+                                this.$router.push({path:'/user/order'});
+                            } else{
+                                this.$Message.error(res.data.message);
+                            }
+                    });
+                }else{
+                    this.$Message.warning('请选择一个收货地址！');
+                }
             },
             getProduct () {
                 const product = [];
@@ -460,7 +462,7 @@
                         totile: this.formValidate.totile,
                         desc: this.formValidate.desc
                     }).then(res => {
-                    if (res.data.message == 'success') {
+                    if (res.data.message == 'SUCCESS') {
                     	this.modal_loading = false;
                     	this.modal2 = false;
                         this.$Message.success('添加成功!');
@@ -481,14 +483,6 @@
                     }
                 })
             },
-            modiflieAdderss(arg) {
-            	this.formValidate.id = arg.id;
-                this.formValidate.name = arg.personName;
-                this.formValidate.phone = arg.phoneNumber;
-                this.formValidate.gender = arg.isDefault.toString();
-                this.formValidate.totile = arg.label;
-                this.modal2 = true;
-            },
             createAddress(name) {
             	this.$refs[name].resetFields();
             	this.formValidate.id = '';
@@ -498,7 +492,7 @@
                 this.phone = object.phoneNumber;
             	this.person = object.personName;
             	this.userAddress = object.address;
-            	alert(this.addressId);
+                
             }
 
         },

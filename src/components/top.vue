@@ -1,7 +1,6 @@
 <!-- 顶部通用组件 -->
-<style>
+<style scoped>
     .user {
-       
         float:right;
     }
     .logo{
@@ -46,43 +45,23 @@
 </style>
 <template>
     <div class="Top">
-        <!-- <div class="fristTop">
-            <div class="container">
-                <div class="userTop">
-                        <a href="/login" style="color:#464c5b">登录</a>
-                        <Divider type="vertical" />
-                        <a href="/register" style="color:#464c5b">免费注册</a>
-                        <Divider type="vertical" />
-                        <a href="/register" style="color:#464c5b">客服服务</a>
-                        <Divider type="vertical" />
-                        <Badge dot>
-                            <a href="" >
-                                <Icon type="ios-notifications-outline" size="20"></Icon>
-                            </a>
-                        </Badge>
-                        
-                        <Divider type="vertical" />
-                        <a href="/login" style="color:#464c5b">我的订单</a>
-                        
-                </div>
-            </div>
-        </div> -->
-        <Menu mode="horizontal" :theme="theme1" active-name="1" class="top"> 
+        <Menu mode="horizontal" :theme="theme" active-name="1" class="top" @on-select="to"> 
             <div class="container">
             <Row>
-                <Col span="3"></Col>
+                <Col span="3">
                 <div class="logo">
-                    <img src="../images/logo.png" width="80%" height="80%">
+                    <img src="../images/logo.png" height="30px" width="30px">
                 </div>
+                 </Col>
                 <Col span="10">
                     <div class="layout-nav">
-                        <MenuItem name="1" to="/">
+                        <MenuItem name="index">
                             首页
                         </MenuItem>
-                        <MenuItem name="2">
+                        <MenuItem name="well-chosen">
                             精选
                         </MenuItem>
-                        <Submenu name="3">
+                        <Submenu name="classify">
                             <template slot="title">
                                 分类
                             </template>
@@ -92,10 +71,9 @@
                                 <MenuItem name="3-3">外设&配件</MenuItem>
                             </MenuGroup>
                         </Submenu>
-                        <MenuItem name="4" to="/product">
+                        <MenuItem name="all">
                             所有商品
                         </MenuItem>
-
                     </div>
                 </Col>
                 <Col span="5">
@@ -120,24 +98,24 @@
                 </Col>
                 <Col span="3">
                     <div class="user">
-                        <Dropdown trigger="click" @on-click="to">
+                        <Dropdown trigger="click" @on-click="to" v-show="logined">
                                <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" />
                             <DropdownMenu slot="list">
-                                <DropdownItem >username</DropdownItem>
+                                <DropdownItem name="username">{{username}}</DropdownItem>
                                 <DropdownItem name="userCenter">
                                     个人中心
                                 </DropdownItem>
-                                <DropdownItem >安全设置</DropdownItem>
-                                <DropdownItem  divided><Icon type="ios-close-circle"/>
+                                <DropdownItem name="safety">安全设置</DropdownItem>
+                                <DropdownItem  divided name="loginOut"><Icon type="ios-close-circle"/>
                                     注销
                                 </DropdownItem>
                             </DropdownMenu>
                         </Dropdown>
-                        <!-- <div>
+                        <div class="login" v-show="notLogin">
                             <a href="/login" style="color:#464c5b">登录</a>
                             <Divider type="vertical" />
                             <a href="/register" style="color:#464c5b">注册</a>
-                        </div> -->
+                        </div>
                     </div>
                 </Col>
             </Row>
@@ -154,18 +132,50 @@
         },
         data () {
             return {
+                username: localStorage.username,
+                logined: localStorage.accessToken,
+                notLogin: !localStorage.accessToken,
                 value2: 0,
-                theme1: 'light',
+                theme: 'light',
                 search: '',
                 searchData: ['Steve Jobs', 'Stephen Gary Wozniak', 'Jonathan Paul Ive']
             }
         },
         methods: {
+            loginOut(){
+                 console.log("loginOut");
+                 localStorage.clear();
+                 this.$Message.success('您已经成功注销!');
+                 this.$router.push({path:'/'});
+
+             },
             filterMethod (value, option) {
                 return option.toUpperCase().indexOf(value.toUpperCase()) !== -1;
             },
             to(name){
-                this.$router.push({path:'/user/order'});
+                switch (name) {
+                    case 'username' :
+                        this.$router.push({path:'/user/order'});
+                        break;
+                    case 'userCenter' :
+                        this.$router.push({path:'/user/order'});
+                        break;
+                     case 'safety' :
+                          this.$router.push({path:'/user/safety'});
+                          break;
+                    case 'loginOut' :
+                          this.loginOut();
+                          break;
+                    case 'index' :
+                          this.$router.push({path:'/'});
+                          break;
+                    case 'well-chosen' :
+                          this.$router.push({path:'/well-chosen'});
+                          break;
+                    case 'all' :
+                          this.$router.push({path:'/product'});
+                          break;
+                }
             }
         }
     }

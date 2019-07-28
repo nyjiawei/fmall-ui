@@ -7,6 +7,13 @@ const routers = [
         },
         component: (resolve) => require(['./views/index.vue'], resolve)
     },
+    {
+        path: '/newUser',
+        meta: {
+            title: '首页'
+        },
+        component: (resolve) => require(['./views/newUserCenter.vue'], resolve)
+    },
 
     {
         path: '/register',

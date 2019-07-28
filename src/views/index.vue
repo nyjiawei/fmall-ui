@@ -1,30 +1,37 @@
 <style scoped lang="less">
-
+    .carousel {
+        
+    }
+    .carousel img{
+    		
+		display:block;
+    }
 </style>
 <template>
     <div class="index" style="background: #f8f8f9;">
         <Top></Top>
-        <br>
-        <div class="container">
-            <Row style="margin-bottom: 20px;">
-            <Carousel autoplay autoplay-speed:4000 loop>
+       
+       
+            <Carousel autoplay autoplay-speed:30000 loop height='350px'>
                 <CarouselItem>
-                    <div class="demo-carousel">
-                        <img src="../images/iphonexmax.jpg" width="100%" height="100%">
+                    <div class="carousel">
+                        <img src="../images/iphonexmax.jpg">
                     </div>
                 </CarouselItem>
                 <CarouselItem>
-                    <div class="demo-carousel">
-                        <img src="../images/watch.jpg" width="100%" height="100%">
+                    <div class="carousel">
+                        <img src="../images/watch.jpg" >
                     </div>
                 </CarouselItem>
                 <CarouselItem>
-                    <div class="demo-carousel">
-                        <img src="../images/iPhonexr.jpg" width="100%" height="100%">
+                    <div class="carousel">
+                        <img src="../images/iPhonexr.jpg">
                     </div>
                 </CarouselItem>
             </Carousel>
-            </Row>
+           
+        <div class="container">
+           
 
             <Divider><h4>每日精选</h4></Divider>
             <Row :gutter="16" style="text-align:center;">
@@ -116,7 +123,7 @@
             <br>
         </div>
         
-        <Footer style="background:#515a6e">
+        <Footer style="background:#F2F2F2">
            <foot></foot> 
         </Footer>
         <!-- 回到到顶部组件 -->
