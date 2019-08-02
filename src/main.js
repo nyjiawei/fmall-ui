@@ -9,17 +9,14 @@ import App from './app.vue';
 import 'iview/dist/styles/iview.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/bootstrap/dist/js/bootstrap.min.js';
-import axios from './config/axios.js';
+import axios from './axios/axios.js';
 import { isNull } from 'util';
 
-
+Vue.prototype.axios = axios;
 Vue.use(VueRouter);
 Vue.use(iView);
 Vue.use(Vuex);
 Vue.use(iviewArea);
-
-//axios公共请求参数
-Vue.prototype.axios = axios;
 
    
 
@@ -42,7 +39,7 @@ router.beforeEach((to, from, next) => {
         else {
             next({
                 path: '/login',
-                query: {redirect: to.fullPath}  // 将跳转的路由path作为参数，登录成功后跳转到该路由
+                query: {redirect: router.currentRoute.fullPath }  // 将跳转的路由path作为参数，登录成功后跳转到该路由
             })
         }
     }

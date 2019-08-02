@@ -74,16 +74,6 @@
                         });
                        
             },
-             created(){
-                //登录添加键盘事件,注意,不能直接在焦点事件上添加回车
-                let that = this;
-                document.onkeydown = function (e) {
-                    let key = window.event.keyCode;
-                    if (key === 13){
-                        that.handleSubmit(name);//方法
-                    }
-                }
-            },
             handleSubmit(name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {

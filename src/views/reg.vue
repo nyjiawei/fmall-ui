@@ -76,7 +76,7 @@
                     email: '',
                     code: ''
                 },
-                img_src: 'http://127.0.0.1:9001/verification',
+                img_src: 'http://127.0.0.1:8084/verification',
                 ruleValidate: {
                     name: [
                         { required: true, message: '用户名不能为空', trigger: 'blur' }
@@ -117,7 +117,7 @@
             
             },
             pushCode () {
-              this.img_src = 'http://127.0.0.1:9001/verification?a=' + Math.random();
+              this.img_src = 'http://127.0.0.1:8084/verification?a=' + Math.random();
             },
             handleSubmit (name) {
                 this.$refs[name].validate((valid) => {

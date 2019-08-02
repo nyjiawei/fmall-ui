@@ -99,9 +99,9 @@
                 <Col span="3">
                     <div class="user">
                         <Dropdown trigger="click" @on-click="to" v-show="logined">
-                               <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" />
+                            <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" />&nbsp;&nbsp;
+                            <span>{{username}}</span>
                             <DropdownMenu slot="list">
-                                <DropdownItem name="username">{{username}}</DropdownItem>
                                 <DropdownItem name="userCenter">
                                     个人中心
                                 </DropdownItem>
@@ -154,9 +154,6 @@
             },
             to(name){
                 switch (name) {
-                    case 'username' :
-                        this.$router.push({path:'/user/order'});
-                        break;
                     case 'userCenter' :
                         this.$router.push({path:'/user/order'});
                         break;
