@@ -51,10 +51,9 @@
                     </Row>
                     <a href="javacript:void(0);" @click="pushCode()" style="float:right">看不清？换一张</a>
                 </FormItem>
-                <FormItem>
-                    <Button type="primary" @click="handleSubmit('formValidate')" long shape="circle">提交</Button>
-                    <br><br>
-                    <Button type="warning" @click="handleReset('formValidate')" long shape="circle">重置</Button>
+                <FormItem style="text-align: center;">
+                    <Button type="primary" @click="handleSubmit('formValidate')">提交</Button>
+                    <Button type="warning" ghost @click="handleReset('formValidate')" style="margin-left: 8px">重置</Button>
                 </FormItem>
             </Form>
         </div>

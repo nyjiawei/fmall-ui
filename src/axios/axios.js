@@ -1,5 +1,6 @@
 import axios from 'axios'
 import {Message} from 'iview';//iview的信息提示框
+import {Notice} from 'iview';//iview的信息提示框
 
 axios.defaults.baseURL = 'http://127.0.0.1:8084';
 axios.defaults.headers['Content-Type'] = 'application/json';
@@ -27,7 +28,10 @@ axios.interceptors.request.use(function (config) {
 axios.interceptors.response.use(function (response) {
     if (response.data.code === 401) {
         localStorage.clear();
-        Message.warning('当前会话过期,请重新登录');
+        Notice.error({
+            title: '提示',
+            desc: '当前会话过期,请重新登录.'
+        });
     }
     return response
     }, function (error) {

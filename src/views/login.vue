@@ -63,11 +63,20 @@
                             }
                         }).then(res => {
                              if (res.data.code == 200) {
-                                //this.$store.dispatch('changeLogin',res.data.data);
                                 localStorage.setItem('accessToken', res.data.data);
                                 localStorage.setItem('username', 'jiawei');
                                 this.$Message.success('登录成功!');
-                                this.$router.push({path:'/'});
+                                //判断路由来源是否有query，处理不是目的跳转的情况
+                                console.log(this.$router);
+                                let query = this.$router.history.current.query;
+                                if(Object.keys(query).length === 0){       
+                                    this.$router.push({path:'/'});
+                                }
+                                else{
+                                    let redirectUrl = query.redirect;
+                                    //跳转到目的路由
+                                    this.$router.push({path:redirectUrl})
+                                }
                             }else{
                              this.$Message.error(res.data.message);
                             }

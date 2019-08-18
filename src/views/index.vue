@@ -10,22 +10,20 @@
 <template>
     <div class="index" style="background: #f8f8f9;">
         <Top></Top>
-       
-       
-            <Carousel autoplay autoplay-speed:30000 loop height='350px'>
+            <Carousel autoplay autoplay-speed:80000 loop>
                 <CarouselItem>
                     <div class="carousel">
-                        <img src="../images/iphonexmax.jpg">
+                       1
                     </div>
                 </CarouselItem>
                 <CarouselItem>
                     <div class="carousel">
-                        <img src="../images/watch.jpg" >
+                      2
                     </div>
                 </CarouselItem>
                 <CarouselItem>
                     <div class="carousel">
-                        <img src="../images/iPhonexr.jpg">
+                        3
                     </div>
                 </CarouselItem>
             </Carousel>

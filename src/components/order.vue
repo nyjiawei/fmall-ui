@@ -11,39 +11,40 @@
 		margin-bottom: 20px;
 	}
 	.order-header{
-		background:#e8eaec;
-		padding:5px;
+		background:#f8f8f9;
+		padding:10px;
 		width: 100%;
 	}
 	.order-header-content{
 		display: inline-block;
-		margin-left: 20px;
+		margin-left: 10px;
 	}
 	.order-content{
 		width: 100%;
+		padding: 3px;
 	}
 	.order-content div{
 		display: inline-block;
 	}
 	.order-productList{
-		width: 40%;
+		width: 35%;
 	}
 	.order-person{
-		width: 10%;
+		width: 25%;
 		text-align: center;
 	}
 	.userInfo{
-		width: 55%;
-		position: absolute;
-		margin-top: 0;
+		width: 60%;
+		position: relative;
+		height: 100%;
 	}
 	.order-price{
-		width: 20%;
+		width: 25%;
 		text-align: center;
 		height: 100%;
 	}
 	.order-status{
-		width: 20%;
+		width: 25%;
 		text-align: center;
 	}
 	.order-opertion{
@@ -55,8 +56,7 @@
 		color: #657180;
 	}
 	.order-delete{
-		width: 20%;
-		text-align: center;
+		float: right;
 	}
 	.product{
 		width: 100%;
@@ -80,8 +80,11 @@
 		    		<!-- 订单列表 -->
 					<div class="order" v-for="item in orderList">
 						<div class="order-header">
-							<div class="order-header-content">订单号：{{ item.id }}</div>
 		    				<div class="order-header-content">{{ item.createTime }}</div>
+							<div class="order-header-content">订单号：{{ item.id }}</div>
+							<div class="order-delete">
+								<Button shape="circle" icon="md-close" size="small" @click="del(item)"></Button>
+							</div>
 						</div>
 						<div class="order-content">
 							<div class="order-productList">
@@ -101,15 +104,17 @@
 									<br/>
 									<span>{{ item.person }}</span>
 								</div>
-								<div class="order-price">￥{{ item.totalPrices }}</div>
-								<div class="order-status">{{ item.status }}</div>
+								<div class="order-price">
+									总额：￥{{ item.totalPrices }}
+								</div>
+								<div class="order-status">
+									<Badge status="processing" v-show="item.status == 'watingPay'"/>
+									{{ item.status }}
+								</div>
 								<div class="order-opertion">
 									<a href="">评价</a><br>
 									<a href="">查看详细</a><br>
 									<a href="">再次购买</a><br>
-								</div>
-								<div class="order-delete">
-									<Button shape="circle" icon="md-close" size="small" @click="del(item)"></Button>
 								</div>
 							</div>
 						</div>

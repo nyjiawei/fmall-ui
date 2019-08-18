@@ -77,6 +77,13 @@ const routers = [
                     requireAuth: true
                 },
                 component: (resolve) => require(['./components/userAddress.vue'], resolve)
+            },
+            {
+                path: 'myself',
+                meta: {
+                    requireAuth: true
+                },
+                component: (resolve) => require(['./components/myself.vue'], resolve)
             }
         ]
     }

@@ -98,19 +98,21 @@
                 </Col>
                 <Col span="3">
                     <div class="user">
-                        <Dropdown trigger="click" @on-click="to" v-show="logined">
-                            <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" />&nbsp;&nbsp;
-                            <span>{{username}}</span>
-                            <DropdownMenu slot="list">
-                                <DropdownItem name="userCenter">
+                        <Submenu name="users" v-show="logined">
+                             <template slot="title">
+                               <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" />
+                                <span>{{username}}</span>
+                            </template>
+                            <MenuGroup>
+                                <MenuItem name="userCenter">
                                     个人中心
-                                </DropdownItem>
-                                <DropdownItem name="safety">安全设置</DropdownItem>
-                                <DropdownItem  divided name="loginOut"><Icon type="ios-close-circle"/>
+                                </MenuItem>
+                                <MenuItem name="safety">安全设置</MenuItem>
+                                <MenuItem name="loginOut"><Icon type="ios-close-circle"/>
                                     注销
-                                </DropdownItem>
-                            </DropdownMenu>
-                        </Dropdown>
+                                </MenuItem>
+                            </MenuGroup>
+                        </Submenu>
                         <div class="login" v-show="notLogin">
                             <a href="/login" style="color:#464c5b">登录</a>
                             <Divider type="vertical" />
