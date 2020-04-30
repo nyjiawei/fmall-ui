@@ -37,7 +37,7 @@
     "html-loader": "^0.3.0",
     "html-webpack-plugin": "^2.28.0",
     "iview-loader": "^1.2.2",
-    "jquery": "^3.3.1",
+    "jquery": "^3.5.0",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
     "popper.js": "^1.14.4",
